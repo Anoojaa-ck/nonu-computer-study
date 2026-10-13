@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2b3a67">
+<meta name="description" content="Study app for Class III Computer - Chapters 2 &amp; 3 (Windows 10 and MS Word).">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Nonu Computer">
+<title>Nonu's Computer - Class III Study App</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128187;</text></svg>">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="app-bar">
+  <button class="icon-btn" id="backBtn" aria-label="Go back" hidden>&laquo;</button>
+  <div class="app-bar-title">
+    <strong id="barTitle">Nonu's Computer</strong>
+    <span id="barSub">Class III &middot; Ch 2 &amp; 3</span>
+  </div>
+  <div class="app-bar-right">
+    <span class="streak-chip" id="streakChip" title="Day streak" hidden>&#128293; <b id="streakNum">0</b></span>
+    <button class="icon-btn speak-toggle" id="ttsToggle" aria-pressed="false" aria-label="Read aloud on or off" title="Read aloud">&#128266;</button>
+  </div>
+</header>
+
+<main id="app">
+
+  <!-- ============================ HOME ============================ -->
+  <section class="view" id="view-home">
+    <div class="hero">
+      <h1>&#128187; Let's get ready,<br><span id="heroName">Nonu</span>!</h1>
+      <p class="hero-sub">Class III Computer &middot; Half-Yearly<br>Chapter 2 - Windows 10 &nbsp;|&nbsp; Chapter 3 - MS Word</p>
+      <div class="hero-stats">
+        <div><b id="statQ">0</b><span>Questions</span></div>
+        <div><b id="statAcc">-</b><span>Accuracy</span></div>
+        <div><b id="statTests">0</b><span>Tests done</span></div>
+      </div>
+    </div>
+
+    <div class="cards">
+      <button class="mode-card mc-study" data-go="study-setup">
+        <span class="mc-ico">&#128218;</span>
+        <span class="mc-body"><b>Study Mode</b><small>Read questions &amp; answers slowly</small></span>
+        <span class="mc-arrow">&rsaquo;</span>
+      </button>
+      <button class="mode-card mc-quiz" data-go="quiz-setup">
+        <span class="mc-ico">&#9997;</span>
+        <span class="mc-body"><b>Quiz Mode</b><small>Practise with instant checking</small></span>
+        <span class="mc-arrow">&rsaquo;</span>
+      </button>
+      <button class="mode-card mc-paper" data-go="paper-setup">
+        <span class="mc-ico">&#128220;</span>
+        <span class="mc-body"><b>Mock Exam</b><small>Full 25-mark paper with timer</small></span>
+        <span class="mc-arrow">&rsaquo;</span>
+      </button>
+      <button class="mode-card mc-progress" data-go="progress">
+        <span class="mc-ico">&#128200;</span>
+        <span class="mc-body"><b>My Progress</b><small>Scores, streaks &amp; weak spots</small></span>
+        <span class="mc-arrow">&rsaquo;</span>
+      </button>
+    </div>
+
+    <div class="section-pick" id="homeSections"></div>
+
+    <details class="about-card">
+      <summary>About this question bank</summary>
+      <div id="aboutBody"></div>
+    </details>
+
+    <p class="muted center foot-note" id="footNote"></p>
+  </section>
+
+  <!-- ========================= STUDY SETUP ========================= -->
+  <section class="view" id="view-study-setup" hidden>
+    <h2 class="view-title">&#128218; Study Mode</h2>
+    <p class="muted">Pick what you want to read. Tap the &#128266; button to hear it.</p>
+    <div class="chip-row" id="studyChapterChips"></div>
+    <div class="list" id="studySectionList"></div>
+  </section>
+
+  <!-- ============================ STUDY ============================ -->
+  <section class="view" id="view-study" hidden>
+    <div class="study-head">
+      <h2 class="view-title" id="studyTitle">Section A</h2>
+      <div class="study-tools">
+        <button class="btn btn-ghost sm" id="speakAllBtn">&#128266; Read all</button>
+        <button class="btn btn-ghost sm" id="stopBtn">&#9632; Stop</button>
+      </div>
+    </div>
+    <div id="studyList" class="qa-list"></div>
+  </section>
+
+  <!-- ========================= QUIZ SETUP ========================= -->
+  <section class="view" id="view-quiz-setup" hidden>
+    <h2 class="view-title">&#9997; Quiz Mode</h2>
+    <p class="muted">Choose sections, then how many questions.</p>
+
+    <div class="field">
+      <label>Chapters</label>
+      <div class="chip-row" id="quizChapterChips"></div>
+    </div>
+
+    <div class="field">
+      <label>Sections <span class="muted" id="quizSectionCount"></span></label>
+      <div class="chip-row" id="quizSectionChips"></div>
+    </div>
+
+    <div class="field">
+      <label>How many questions?</label>
+      <div class="seg" id="quizCount">
+        <button data-n="10">10</button>
+        <button data-n="20">20</button>
+        <button data-n="30">30</button>
+        <button data-n="0" class="on">All</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Timer</label>
+      <div class="seg" id="quizTimer">
+        <button data-t="0" class="on">Off</button>
+        <button data-t="300">5 min</button>
+        <button data-t="600">10 min</button>
+        <button data-t="1200">20 min</button>
+      </div>
+    </div>
+
+    <label class="switch-row">
+      <span><b>Show the answer right away</b><small>See if you are right after each question</small></span>
+      <input type="checkbox" id="quizReveal" checked>
+    </label>
+
+    <label class="switch-row">
+      <span><b>Shuffle questions</b><small>Different order every time</small></span>
+      <input type="checkbox" id="quizShuffle" checked>
+    </label>
+
+    <button class="btn btn-primary big" id="startQuizBtn">Start Quiz &#9654;</button>
+    <p class="muted center" id="quizSummary"></p>
+  </section>
+
+  <!-- ======================= MOCK EXAM SETUP ======================= -->
+  <section class="view" id="view-paper-setup" hidden>
+    <h2 class="view-title">&#128220; Mock Exam</h2>
+    <p class="muted">The same pattern as the First Mid-Semester Paper (25 marks).</p>
+    <div class="paper-map" id="paperMap"></div>
+    <div class="field">
+      <label>Time limit</label>
+      <div class="seg" id="paperTimer">
+        <button data-t="0" class="on">No timer</button>
+        <button data-t="900">15 min</button>
+        <button data-t="1800">30 min</button>
+      </div>
+    </div>
+    <label class="switch-row">
+      <span><b>Show answers as I go</b><small>Turn off to sit the real exam</small></span>
+      <input type="checkbox" id="paperReveal">
+    </label>
+    <button class="btn btn-primary big" id="startPaperBtn">Begin Exam &#9654;</button>
+  </section>
+
+  <!-- ============================ QUIZ ============================ -->
+  <section class="view view-quiz" id="view-quiz" hidden>
+    <div class="quiz-bar">
+      <div class="quiz-progress"><div class="qp-fill" id="qpFill"></div></div>
+      <div class="quiz-meta">
+        <span id="quizPos">1 / 10</span>
+        <span id="quizTimerBox" class="timer" hidden>&#9201; 05:00</span>
+      </div>
+    </div>
+    <div class="quiz-tags">
+      <span class="tag" id="quizSectionTag">Section A</span>
+      <span class="tag tag-ghost" id="quizMarksTag">1 mark</span>
+    </div>
+
+    <div id="quizCard" class="quiz-card"></div>
+
+    <div class="quiz-nav">
+      <button class="btn btn-ghost" id="prevQ">&#8249; Back</button>
+      <button class="btn btn-primary grow" id="nextQ">Next &#8250;</button>
+    </div>
+  </section>
+
+  <!-- =========================== RESULTS =========================== -->
+  <section class="view" id="view-results" hidden>
+    <div class="result-hero">
+      <div class="score-ring" id="scoreRing"><b id="scorePct">0%</b><span id="scoreRaw">0/0</span></div>
+      <h2 id="starsMsg">Good try!</h2>
+      <p class="muted" id="marksMsg"></p>
+    </div>
+
+    <div class="field">
+      <label>Section by section</label>
+      <div class="bars" id="resultBars"></div>
+    </div>
+
+    <div class="row-btns">
+      <button class="btn btn-primary grow" id="retryBtn">Try Again</button>
+      <button class="btn btn-ghost grow" id="studyWrongBtn">Study the ones I got wrong</button>
+    </div>
+    <button class="btn btn-ghost wide" id="homeBtn">Back to Home</button>
+
+    <h3 class="sub-title">Review all answers</h3>
+    <div class="review-list" id="reviewList"></div>
+  </section>
+
+  <!-- =========================== PROGRESS =========================== -->
+  <section class="view" id="view-progress" hidden>
+    <h2 class="view-title">&#128200; My Progress</h2>
+    <div class="tiles" id="progTiles"></div>
+    <div class="field">
+      <label>Accuracy by section</label>
+      <div class="bars" id="progBars"></div>
+    </div>
+    <div class="field">
+      <label>Last 10 tests</label>
+      <div class="history" id="progHistory"></div>
+    </div>
+    <div class="field">
+      <label>Questions I got wrong most often</label>
+      <div class="weak-list" id="weakList"></div>
+    </div>
+    <button class="btn btn-danger wide" id="resetBtn">Reset all my progress</button>
+  </section>
+
+</main>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="data/questions.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

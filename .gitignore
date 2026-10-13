@@ -1,0 +1,9 @@
+# zip built for sharing - not needed in the repo
+Nonu-Computer-Study-App.zip
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+~$*

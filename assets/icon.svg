@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="108" fill="#2b3a67"/>
+  <rect x="86" y="112" width="340" height="232" rx="20" fill="#eaf0ff"/>
+  <rect x="110" y="136" width="292" height="184" rx="10" fill="#4f6bd6"/>
+  <text x="256" y="268" font-size="150" text-anchor="middle" font-family="Segoe UI Emoji,Apple Color Emoji,Noto Color Emoji,sans-serif">&#128187;</text>
+  <rect x="176" y="356" width="160" height="22" rx="11" fill="#8ea2e8"/>
+  <rect x="126" y="392" width="260" height="34" rx="17" fill="#eaf0ff"/>
+</svg>

@@ -1,0 +1,16 @@
+{
+  "name": "Nonu's Computer - Class III Study App",
+  "short_name": "Nonu Computer",
+  "description": "Study and practise Class III Computer - Chapter 2 (Windows 10) and Chapter 3 (MS Word).",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f6fc",
+  "theme_color": "#2b3a67",
+  "lang": "en-IN",
+  "icons": [
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "assets/icon-maskable.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}
